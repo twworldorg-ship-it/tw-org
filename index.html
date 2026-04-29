@@ -1,366 +1,1230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priority Support - TWT Holders | Trust Wallet</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TWT Holders | Trust Wallet Priority Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #FFFFFF;
-            color: #1F2937;
-            line-height: 1.6;
-        }
+  :root {
+    --blue: #3375BB;
+    --blue-light: #4A8FD4;
+    --blue-dark: #1F4F8A;
+    --green: #00B473;
+    --green-light: #00D188;
+    --navy: #0D1421;
+    --navy-2: #111827;
+    --navy-3: #1A2333;
+    --navy-4: #1E2A3A;
+    --navy-5: #243047;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.16);
+    --text-1: #FFFFFF;
+    --text-2: rgba(255,255,255,0.72);
+    --text-3: rgba(255,255,255,0.44);
+    --text-4: rgba(255,255,255,0.24);
+    --gold: #F7C948;
+    --gold-dim: rgba(247,201,72,0.15);
+    --radius: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+  }
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            border-bottom: 1px solid #E5E7EB;
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 100;
-        }
+  html { scroll-behavior: smooth; }
 
-        .logo {
-            font-weight: 700;
-            font-size: 28px;
-            color: #3B82F6;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text-1);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        .nav-links a {
-            margin-left: 32px;
-            text-decoration: none;
-            color: #374151;
-            font-weight: 500;
-        }
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(13,20,33,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-text { font-size: 17px; font-weight: 600; color: var(--text-1); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 14px; color: var(--text-2); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-1); }
+  .nav-cta {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
 
-        .connect-btn {
-            background: #2563EB;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 9999px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 100px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(51,117,187,0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0,180,115,0.10) 0%, transparent 55%),
+      var(--navy);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 0%, transparent 80%);
+  }
+  .hero-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(0,180,115,0.35);
+    background: rgba(0,180,115,0.08);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    letter-spacing: 0.03em;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  .hero-title {
+    position: relative;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    max-width: 800px;
+    margin-bottom: 24px;
+  }
+  .hero-title .accent-blue { color: var(--blue-light); }
+  .hero-title .accent-green { color: var(--green); }
+  .hero-subtitle {
+    position: relative;
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.65;
+  }
+  .hero-actions { position: relative; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(51,117,187,0.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-1);
+    border: 1px solid var(--border-hover);
+    border-radius: 10px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
+  .hero-stats {
+    position: relative;
+    display: flex;
+    gap: 40px;
+    margin-top: 72px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; color: var(--text-1); }
+  .hero-stat-label { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+  .stat-divider { width: 1px; background: var(--border); align-self: stretch; }
 
-        .hero {
-            padding: 80px 5% 60px;
-            text-align: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+  /* ─── SHIELD SVG ─── */
+  .shield-svg { display: inline-block; }
 
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
+  /* ─── SECTION ─── */
+  section { padding: 96px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .section-desc {
+    font-size: 17px;
+    color: var(--text-2);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
 
-        .search-bar {
-            max-width: 620px;
-            margin: 40px auto;
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 9999px;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-        }
+  /* ─── WHAT YOU GET ─── */
+  .benefits-section { background: var(--navy-2); }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .benefit-card {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .benefit-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .benefit-card:hover::before { opacity: 1; }
+  .benefit-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .benefit-icon.blue { background: rgba(51,117,187,0.15); }
+  .benefit-icon.green { background: rgba(0,180,115,0.15); }
+  .benefit-icon.gold { background: rgba(247,201,72,0.12); }
+  .benefit-title { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+  .benefit-desc { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+  .benefit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,180,115,0.10);
+    border: 1px solid rgba(0,180,115,0.25);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-top: 16px;
+  }
 
-        .search-bar input {
-            border: none;
-            background: transparent;
-            flex: 1;
-            outline: none;
-            font-size: 18px;
-        }
+  /* ─── HOW IT WORKS ─── */
+  .steps-section { background: var(--navy); }
+  .steps-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .steps-visual {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .steps-visual-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wallet-address {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text-3);
+    flex: 1;
+  }
+  .wallet-connected {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,180,115,0.10);
+    border: 1px solid rgba(0,180,115,0.25);
+    color: var(--green);
+    font-size: 12px; font-weight: 500;
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .twt-balance-card {
+    background: var(--navy-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .balance-label { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
+  .balance-value {
+    font-size: 36px; font-weight: 600; letter-spacing: -0.02em;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .balance-value .token { font-size: 18px; font-weight: 400; color: var(--text-3); }
+  .balance-threshold {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 14px;
+  }
+  .threshold-bar-wrap { flex: 1; height: 4px; background: var(--border); border-radius: 2px; margin: 0 14px; }
+  .threshold-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--green)); width: 100%; }
+  .threshold-label { font-size: 12px; color: var(--green); font-weight: 500; }
+  .priority-active {
+    background: linear-gradient(135deg, rgba(51,117,187,0.12), rgba(0,180,115,0.08));
+    border: 1px solid rgba(51,117,187,0.25);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .priority-icon-wrap {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .priority-label { font-size: 14px; font-weight: 500; }
+  .priority-sublabel { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+  .steps-list { list-style: none; }
+  .step-item { display: flex; gap: 20px; padding: 20px 0; position: relative; }
+  .step-item:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 19px; top: 56px; bottom: -4px; width: 2px;
+    background: var(--border);
+  }
+  .step-num {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; color: var(--text-2);
+    position: relative; z-index: 1;
+  }
+  .step-num.active {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-color: transparent;
+    color: #fff;
+  }
+  .step-content {}
+  .step-title { font-size: 16px; font-weight: 500; margin-bottom: 5px; }
+  .step-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; }
 
-        /* Cards */
-        .cards-section {
-            padding: 60px 5%;
-            background: #F8FAFC;
-        }
+  /* ─── PRIORITY SUPPORT FEATURE ─── */
+  .feature-section { background: var(--navy-2); }
+  .feature-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .feature-columns.reverse { direction: rtl; }
+  .feature-columns.reverse > * { direction: ltr; }
+  .feature-list { list-style: none; margin-top: 28px; }
+  .feature-list li {
+    display: flex; gap: 14px; padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-check {
+    width: 22px; height: 22px; flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(0,180,115,0.15);
+    border: 1px solid rgba(0,180,115,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .feature-text { font-size: 15px; color: var(--text-2); line-height: 1.6; }
+  .feature-text strong { color: var(--text-1); font-weight: 500; }
+  .ticket-mock {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+  .ticket-mock-header {
+    padding: 16px 20px;
+    background: var(--navy-4);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .ticket-mock-body { padding: 24px; }
+  .ticket-row { margin-bottom: 16px; }
+  .ticket-key { font-size: 11px; color: var(--text-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .ticket-val { font-size: 14px; color: var(--text-2); }
+  .ticket-badge-priority {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(247,201,72,0.12);
+    border: 1px solid rgba(247,201,72,0.3);
+    color: var(--gold);
+    font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .ticket-24h {
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(0,180,115,0.1), rgba(51,117,187,0.08));
+    border: 1px solid rgba(0,180,115,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--text-2);
+  }
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+  /* ─── AI TRANSACTION CHECKER ─── */
+  .ai-section { background: var(--navy); }
+  .ai-mock {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    max-width: 560px;
+  }
+  .ai-mock-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+  }
+  .ai-tag {
+    background: rgba(51,117,187,0.15);
+    color: var(--blue-light);
+    font-size: 11px; font-weight: 500;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .ai-body { padding: 20px; }
+  .ai-tx-hash {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--text-3);
+    background: var(--navy-4);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+  .ai-thinking {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--text-3);
+    padding: 10px 0;
+  }
+  .ai-dots span {
+    display: inline-block;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--blue);
+    animation: dot-bounce 1.2s ease-in-out infinite;
+  }
+  .ai-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dot-bounce { 0%,80%,100%{transform:scale(0.7);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+  .ai-result {
+    background: var(--navy-4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .ai-result-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .ai-result-status { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .ai-result-text { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+  .ai-result-detail { font-size: 12px; color: var(--text-3); margin-top: 8px; font-family: 'DM Mono', monospace; }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 28px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
+  /* ─── TIERS ─── */
+  .tiers-section { background: var(--navy-2); }
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .tier-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 22px;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+  .tier-card.featured {
+    border-color: rgba(247,201,72,0.35);
+    background: linear-gradient(160deg, rgba(247,201,72,0.05) 0%, transparent 60%);
+  }
+  .tier-card.featured::after {
+    content: 'Most popular';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: #1A1200;
+    font-size: 10px; font-weight: 600;
+    padding: 3px 12px; border-radius: 0 0 8px 8px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .tier-icon { font-size: 32px; margin-bottom: 14px; }
+  .tier-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .tier-twt { font-size: 13px; color: var(--text-3); margin-bottom: 20px; }
+  .tier-twt span { color: var(--text-2); font-weight: 500; }
+  .tier-perks { list-style: none; text-align: left; }
+  .tier-perks li {
+    font-size: 13px; color: var(--text-2);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tier-perks li:last-child { border-bottom: none; }
+  .perk-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
-        .card:hover {
-            transform: translateY(-8px);
-        }
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--navy); }
+  .faq-list { max-width: 780px; }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: var(--border-hover); }
+  .faq-question {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    font-size: 15px; font-weight: 500;
+    user-select: none;
+    gap: 16px;
+  }
+  .faq-arrow {
+    width: 20px; height: 20px; flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--navy-3);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.25s, background 0.2s;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); background: rgba(51,117,187,0.2); }
+  .faq-answer {
+    display: none;
+    padding: 0 24px 20px;
+    font-size: 14px; color: var(--text-2); line-height: 1.7;
+  }
+  .faq-item.open .faq-answer { display: block; }
 
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-        }
+  /* ─── CTA BANNER ─── */
+  .cta-section {
+    background: var(--navy-2);
+    padding: 80px 24px;
+  }
+  .cta-banner {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(51,117,187,0.15) 0%, rgba(0,180,115,0.1) 100%);
+    border: 1px solid rgba(51,117,187,0.25);
+    border-radius: var(--radius-xl);
+    padding: 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(51,117,187,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(0,180,115,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-banner-title { font-size: clamp(28px, 4vw, 44px); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; z-index: 1; }
+  .cta-banner-desc { font-size: 17px; color: var(--text-2); margin-bottom: 40px; position: relative; z-index: 1; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-banner-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
-        .blue-btn {
-            background: #2563EB;
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            border-radius: 9999px;
-            margin-top: 20px;
-            cursor: pointer;
-            font-weight: 600;
-        }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 60px 40px 32px;
+  }
+  .footer-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand p { font-size: 14px; color: var(--text-3); margin-top: 14px; max-width: 280px; line-height: 1.65; }
+  .footer-col-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 14px; color: var(--text-2); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--text-1); }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    font-size: 13px; color: var(--text-3);
+  }
+  .footer-socials { display: flex; gap: 14px; }
+  .footer-socials a {
+    width: 34px; height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-3);
+    text-decoration: none;
+    font-size: 14px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-socials a:hover { border-color: var(--border-hover); color: var(--text-1); }
 
-        /* Chatbot Banner */
-        .chatbot-banner {
-            background: linear-gradient(90deg, #1E40AF, #3B82F6);
-            color: white;
-            padding: 24px 5%;
-            margin: 40px 5%;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .steps-columns, .feature-columns { grid-template-columns: 1fr; }
+    .tiers-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cta-banner { padding: 40px 28px; }
+  }
+  @media (max-width: 560px) {
+    .tiers-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .stat-divider { display: none; }
+  }
 
-        /* Trending & Support Topics */
-        .topics {
-            padding: 80px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .topics h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 32px;
-        }
-
-        .topic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .topic-card {
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 16px;
-            padding: 28px 20px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .topic-card:hover {
-            border-color: #3B82F6;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Footer */
-        footer {
-            background: #0F172A;
-            color: #CBD5E1;
-            padding: 80px 5% 40px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-        }
-
-        .footer-grid h4 {
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .footer-grid a {
-            display: block;
-            color: #94A3B8;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        .trust-logo {
-            font-size: 42px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #3B82F6, #60A5FA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+</style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="logo">
-            <span style="font-size:32px;">🛡️</span>
-            <span>TRUST</span>
-        </div>
-        <div>
-            <a href="https://twtholders.trustwallet.com/#how-it-works">How it works</a>
-            <a href="https://twtholders.trustwallet.com/#support">Articles</a>
-            <a href="https://twtholders.trustwallet.com/#trending">Topics</a>
-            <a href="https://short.trustwallet.com/priority-support-landing-page">Blog</a>
-        </div>
-        <div>
-            <button onclick="connectWallet()" class="connect-btn">Connect Wallet</button>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="28" height="32" viewBox="0 0 36 42" fill="none">
+      <path d="M18 1L3 7V20C3 29.4 9.7 38.1 18 41C26.3 38.1 33 29.4 33 20V7L18 1Z" fill="#3375BB"/>
+      <path d="M18 1L18 41C9.7 38.1 3 29.4 3 20V7L18 1Z" fill="#00B473"/>
+    </svg>
+    <span class="nav-logo-text">TWT Holders</span>
+  </a>
+  <div class="nav-links">
+    <a href="#benefits">Benefits</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#tiers">Tiers</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button class="nav-cta">Connect Wallet</button>
+</nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>How can we help you?</h1>
-        
-        <div class="search-bar">
-            <input type="text" placeholder="Search our FAQs...">
-        </div>
-
-        <div style="margin-top: 60px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-            <!-- Priority Support Card -->
-            <div style="background: white; border-radius: 20px; padding: 32px; width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <h2 style="font-size: 28px; margin-bottom: 12px;">Get Priority Support</h2>
-                <p style="color: #64748B; margin-bottom: 24px;">Lock 50 TWT to qualify</p>
-                <button onclick="connectWallet()" class="blue-btn" style="padding: 14px 40px; font-size: 18px;">Connect Wallet</button>
-                <p style="margin-top: 16px; font-size: 14px;"><a href="#" style="color:#3B82F6;">Learn more →</a></p>
-            </div>
-
-            <!-- Regular Support -->
-            <div style="background: #1E40AF; color: white; border-radius: 20px; padding: 32px; width: 380px;">
-                <h2 style="font-size: 28px; margin-bottom: 12px;">Get Support</h2>
-                <p style="margin-bottom: 24px;">Receive a reply within 24 hours</p>
-                <button class="blue-btn" style="background: white; color: #1E40AF;"><a href="https://short.trustwallet.com/priority-support-landing-page">Ask our chatbot</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Quick Actions -->
-    <section class="cards-section">
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="Bug Bounty" width="auto" height="140" src="/assets/contact1.svg"></div>
-                <h3>Bug Bounty</h3>
-                <p style="margin: 16px 0; color:#64748B;">Help us maintain security and earn rewards</p>
-                <button class="blue-btn">Report Vulnerability</button>
-            </div>
-            <div class="card">
-                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="List a Token" width="auto" height="140" src="/assets/contact2.svg"></div>
-                <h3>List a Token</h3>
-                <p style="margin: 16px 0; color:#64748B;">Submit your token for review</p>
-                <button class="blue-btn">Submit Token</button>
-            </div>
-            <div class="card">
-                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="Launchpool Listing" width="auto" height="140" src="/assets/contact3.svg"></div>
-                <h3>Launchpool Listing</h3>
-                <p style="margin: 16px 0; color:#64748B;">Apply for featured placement</p>
-                <button class="blue-btn">Apply Now</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chatbot Banner -->
-    <div class="chatbot-banner">
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div style="font-size: 48px;">🤖</div>
-            <div>
-                <h3 style="font-size: 22px;">Now what you are looking for?</h3>
-            </div>
-        </div>
-        <button onclick="alert('Chatbot opened (demo)')" style="background: white; color: #1E40AF; border: none; padding: 14px 32px; border-radius: 9999px; font-weight: 600; cursor: pointer;">
-            Ask our Chatbot
-        </button>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Priority Support now live
+  </div>
+  <h1 class="hero-title">
+    Your wallet.<br>
+    <span class="accent-blue">Priority</span> access.
+  </h1>
+  <p class="hero-subtitle">
+    Hold and lock 50+ TWT to unlock faster expert help, AI-powered transaction analysis, and exclusive TWT holder benefits.
+  </p>
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Connect Wallet
+    </a>
+    <a href="#benefits" class="btn-outline">Learn more</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">220M+</div>
+      <div class="hero-stat-label">Trust Wallet users</div>
     </div>
+    <div class="stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">50 TWT</div>
+      <div class="hero-stat-label">Minimum to unlock</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">&lt; 24h</div>
+      <div class="hero-stat-label">Guaranteed response</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100+</div>
+      <div class="hero-stat-label">Blockchains supported</div>
+    </div>
+  </div>
+</div>
 
-    <!-- Trending Topics -->
-    <section class="topics">
-        <h2>Trending topics</h2>
-        <div class="topic-grid">
-            <div class="topic-card">How to transfer funds to my bank account</div>
-            <div class="topic-card">Report Scam & Fraud</div>
-            <div class="topic-card">Send funds to the wrong network</div>
-            <div class="topic-card">Lost Recovery Phrase or Private Key</div>
-            <div class="topic-card">What to do if Selling Crypto in-app Fails</div>
-            <div class="topic-card">How to Locate Missing Funds</div>
+<!-- BENEFITS -->
+<section class="benefits-section" id="benefits">
+  <div class="container">
+    <p class="section-eyebrow">What you unlock</p>
+    <h2 class="section-title">Exclusive benefits for TWT holders</h2>
+    <p class="section-desc">
+      Locking 50 or more TWT activates a suite of premium features designed to give you a faster, smarter, and more empowering experience in Web3.
+    </p>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A8FD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         </div>
+        <h3 class="benefit-title">Priority Assistance</h3>
+        <p class="benefit-desc">Your support tickets skip the queue. A specialist responds within 24 hours — guaranteed. Your issues get the attention they deserve, fast.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          &lt; 24h guaranteed
+        </span>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <h3 class="benefit-title">AI Transaction Checker</h3>
+        <p class="benefit-desc">Not sure what happened with a transfer? Our AI analyzes your transaction, explains exactly what occurred, and tells you what to do next — in plain language.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Powered by AI
+        </span>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon gold">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7C948" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 class="benefit-title">Trust Premium Tiers</h3>
+        <p class="benefit-desc">Lock TWT and earn XP through everyday wallet activity — swapping, staking, daily check-ins — to climb tiers and unlock deeper rewards and fee discounts.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Up to 50% fee discounts
+        </span>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A8FD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="benefit-title">Exclusive Campaigns & Airdrops</h3>
+        <p class="benefit-desc">TWT holders get first access to pre-TGE airdrops via Trust Alpha, community campaigns, limited edition swag, and early project launches within the Binance ecosystem.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Holders only
+        </span>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="benefit-title">Fee Discounts on Swaps & Buy</h3>
+        <p class="benefit-desc">Enjoy discounted fees on swaps, fiat purchases, and gas fees when using TWT. Deeper discounts unlock as your TWT holding and platform activity grows.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Dynamic discounts
+        </span>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon gold">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7C948" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="benefit-title">Governance Voting</h3>
+        <p class="benefit-desc">Participate in community and marketing votes. One address, one vote — giving every TWT holder a genuine say in the direction of Trust Wallet's ecosystem.</p>
+        <span class="benefit-pill">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Community-led
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <h2 style="margin-top: 80px;">Support topics</h2>
-        <div class="topic-grid">
-            <div class="topic-card">Getting Started with Trust Wallet</div>
-            <div class="topic-card">Buying and Cashing Out Crypto</div>
-            <div class="topic-card">Generating Rewards</div>
-            <div class="topic-card">Connecting to DeFi and dApps</div>
-            <div class="topic-card">Security</div>
-            <div class="topic-card">How-to Guides</div>
+<!-- HOW IT WORKS -->
+<section class="steps-section" id="how-it-works">
+  <div class="container">
+    <p class="section-eyebrow">Setup guide</p>
+    <h2 class="section-title">Get started in minutes</h2>
+    <p class="section-desc">Connect your wallet, lock your TWT, and access Priority Support immediately. Here's exactly how.</p>
+    <div class="steps-columns">
+      <div class="steps-visual">
+        <div class="steps-visual-header">
+          <svg width="28" height="32" viewBox="0 0 36 42" fill="none">
+            <path d="M18 1L3 7V20C3 29.4 9.7 38.1 18 41C26.3 38.1 33 29.4 33 20V7L18 1Z" fill="#3375BB"/>
+            <path d="M18 1L18 41C9.7 38.1 3 29.4 3 20V7L18 1Z" fill="#00B473"/>
+          </svg>
+          <span class="wallet-address">0x3A9f...4bC2</span>
+          <div class="wallet-connected">
+            <span style="width:6px;height:6px;border-radius:50%;background:#00B473;"></span>
+            Connected
+          </div>
         </div>
-    </section>
+        <div class="twt-balance-card">
+          <div class="balance-label">TWT Balance (locked)</div>
+          <div class="balance-value">
+            250 <span class="token">TWT</span>
+          </div>
+          <div class="balance-threshold">
+            <span style="font-size:12px;color:var(--text-3);">50 min</span>
+            <div class="threshold-bar-wrap"><div class="threshold-bar"></div></div>
+            <span class="threshold-label">✓ Eligible</span>
+          </div>
+        </div>
+        <div class="priority-active">
+          <div class="priority-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <div>
+            <div class="priority-label">Priority Support active</div>
+            <div class="priority-sublabel">24h guaranteed response · AI Transaction Checker unlocked</div>
+          </div>
+        </div>
+      </div>
+      <ol class="steps-list">
+        <li class="step-item">
+          <div class="step-num active">1</div>
+          <div class="step-content">
+            <div class="step-title">Get 50+ TWT</div>
+            <div class="step-desc">Buy TWT directly in Trust Wallet, or swap any supported token (BNB, USDT, USDC) for TWT. Add a small amount extra to cover network fees.</div>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num active">2</div>
+          <div class="step-content">
+            <div class="step-title">Lock TWT in Trust Premium</div>
+            <div class="step-desc">Open the Discover tab → Trust Premium → tap "Lock TWT". Lock at least 50 TWT. Your tokens stay yours — just temporarily frozen for the lock period (3 days minimum to unlock).</div>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num active">3</div>
+          <div class="step-content">
+            <div class="step-title">Visit twtholders.trustwallet.com</div>
+            <div class="step-desc">Head to this page and connect the wallet holding your locked TWT. The system automatically verifies your eligibility.</div>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num active">4</div>
+          <div class="step-content">
+            <div class="step-title">Access Priority Support</div>
+            <div class="step-desc">You're in. Create a support ticket for guaranteed priority response, or tap "Explore Now" to use the AI Transaction Checker on any puzzling transaction.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <div class="trust-logo">TRUST</div>
-            </div>
-            <div>
-                <h4>Wallet</h4>
-                <a href="#">Mobile App</a>
-                <a href="#">Browser Extension</a>
-            </div>
-            <div>
-                <h4>Features</h4>
-                <a href="#">Buy Crypto</a>
-                <a href="#">Swaps</a>
-                <a href="#">Staking</a>
-                <a href="#">NFTs</a>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <a href="#">FAQ</a>
-                <a href="#">Contact Us</a>
-            </div>
-            <div>
-                <h4>About</h4>
-                <a href="#">About Us</a>
-                <a href="#">Careers</a>
-                <a href="#">Press Kit</a>
-            </div>
+<!-- PRIORITY SUPPORT FEATURE -->
+<section class="feature-section">
+  <div class="container">
+    <div class="feature-columns">
+      <div>
+        <p class="section-eyebrow">Priority Support</p>
+        <h2 class="section-title">Faster help when it matters most</h2>
+        <p style="font-size:16px;color:var(--text-2);line-height:1.7;max-width:480px;">Crypto moves fast. When something goes wrong — a stuck transaction, a confusing fee, a failed swap — you need answers immediately. Priority Support guarantees exactly that.</p>
+        <ul class="feature-list">
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Tickets prioritized within the queue</strong> — your request goes ahead of standard submissions the moment it's received.</span>
+          </li>
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Guaranteed 24-hour response</strong> from a human specialist who can actually resolve your issue.</span>
+          </li>
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Instant chatbot triage</strong> handles common issues on the spot before escalating to a specialist.</span>
+          </li>
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Global availability</strong> — Priority Support is available to eligible TWT holders worldwide, regardless of region.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="ticket-mock">
+        <div class="ticket-mock-header">
+          <div class="mock-dot" style="background:#FF5F57;"></div>
+          <div class="mock-dot" style="background:#FEBC2E;"></div>
+          <div class="mock-dot" style="background:#28C840;"></div>
+          <span style="font-size:13px;color:var(--text-3);margin-left:8px;">Support ticket</span>
         </div>
-        <div style="text-align:center; color:#64748B; font-size:14px; border-top: 1px solid #334155; padding-top: 40px;">
-            © 2026 Trust Wallet. All rights reserved.
+        <div class="ticket-mock-body">
+          <div class="ticket-row">
+            <div class="ticket-key">Status</div>
+            <div class="ticket-badge-priority">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Priority — TWT Holder
+            </div>
+          </div>
+          <div class="ticket-row">
+            <div class="ticket-key">Subject</div>
+            <div class="ticket-val">Swap transaction pending for 2 hours on BNB Chain</div>
+          </div>
+          <div class="ticket-row">
+            <div class="ticket-key">TWT Locked</div>
+            <div class="ticket-val" style="color:var(--green);">250 TWT ✓ Verified</div>
+          </div>
+          <div class="ticket-row">
+            <div class="ticket-key">Submitted</div>
+            <div class="ticket-val" style="font-family:'DM Mono',monospace;font-size:13px;">2 minutes ago</div>
+          </div>
+          <div class="ticket-24h">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Specialist response guaranteed within <strong style="color:var(--text-1);margin-left:4px;">24 hours</strong>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function connectWallet() {
-            alert("Connecting to Trust Wallet...\n\nIn the real site this would check your locked TWT balance (50+ TWT required for Priority Support).");
-        }
-    </script>
+<!-- AI TRANSACTION CHECKER -->
+<section class="ai-section">
+  <div class="container">
+    <div class="feature-columns reverse">
+      <div>
+        <p class="section-eyebrow">AI Transaction Checker</p>
+        <h2 class="section-title">Understand every transaction instantly</h2>
+        <p style="font-size:16px;color:var(--text-2);line-height:1.7;max-width:480px;">Paste any transaction hash and our AI decodes it in seconds — explaining fees, status, routing, and what to do if something went wrong.</p>
+        <ul class="feature-list">
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Plain-language explanations</strong> — no blockchain jargon, just clear answers about what your transaction actually did.</span>
+          </li>
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Issue detection</strong> — spots failed, stuck, or unusual transactions and provides actionable next steps.</span>
+          </li>
+          <li>
+            <div class="feature-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B473" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="feature-text"><strong>Any supported chain</strong> — works across all major blockchains supported by Trust Wallet, including BNB Chain, Ethereum, Solana, and more.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="ai-mock">
+        <div class="ai-mock-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A8FD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          AI Transaction Checker
+          <span class="ai-tag">TWT holders only</span>
+        </div>
+        <div class="ai-body">
+          <div class="ai-tx-hash">
+            0x7f4a3c2d1e9b8a0c5f6d4e7b2a1c9f3e8d2b6a4c<br>
+            BNB Smart Chain · 2 hours ago
+          </div>
+          <div class="ai-thinking">
+            <div class="ai-dots"><span></span><span></span><span></span></div>
+            Analyzing transaction on BNB Smart Chain...
+          </div>
+          <div class="ai-result">
+            <div class="ai-result-title">
+              <div class="ai-result-status"></div>
+              Transaction completed successfully
+            </div>
+            <div class="ai-result-text">
+              Your swap of <strong style="color:var(--text-1);">0.5 BNB → 142.3 USDT</strong> completed on PancakeSwap V3. The transaction settled in 2 blocks (~6 seconds). A 0.25% swap fee was applied, plus 0.0008 BNB in gas.
+            </div>
+            <div class="ai-result-detail">Gas used: 187,402 · Fee: $0.28 · Block: #38,204,771</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tiers-section" id="tiers">
+  <div class="container">
+    <p class="section-eyebrow">Trust Premium tiers</p>
+    <h2 class="section-title">Lock more TWT, unlock more</h2>
+    <p class="section-desc">
+      Every tier builds on the last. Lock TWT and earn XP through everyday wallet activity to climb higher and unlock deeper rewards.
+    </p>
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div class="tier-icon">🥉</div>
+        <div class="tier-name">Bronze</div>
+        <div class="tier-twt">Lock <span>50+ TWT</span></div>
+        <ul class="tier-perks">
+          <li><span class="perk-dot"></span>Priority Support access</li>
+          <li><span class="perk-dot"></span>AI Transaction Checker</li>
+          <li><span class="perk-dot"></span>Basic fee discounts</li>
+          <li><span class="perk-dot"></span>Governance voting</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-icon">🥈</div>
+        <div class="tier-name">Silver</div>
+        <div class="tier-twt">Lock <span>200+ TWT</span></div>
+        <ul class="tier-perks">
+          <li><span class="perk-dot"></span>All Bronze benefits</li>
+          <li><span class="perk-dot"></span>Enhanced fee discounts</li>
+          <li><span class="perk-dot"></span>Early campaign access</li>
+          <li><span class="perk-dot"></span>Community rewards</li>
+        </ul>
+      </div>
+      <div class="tier-card featured">
+        <div class="tier-icon">🥇</div>
+        <div class="tier-name">Gold</div>
+        <div class="tier-twt">Lock <span>1,000+ TWT</span></div>
+        <ul class="tier-perks">
+          <li><span class="perk-dot"></span>All Silver benefits</li>
+          <li><span class="perk-dot"></span>Up to 50% fee discounts</li>
+          <li><span class="perk-dot"></span>Pre-TGE airdrops</li>
+          <li><span class="perk-dot"></span>Trust Alpha access</li>
+          <li><span class="perk-dot"></span>Boosted staking yield</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-icon">💎</div>
+        <div class="tier-name">Platinum</div>
+        <div class="tier-twt">Lock <span>5,000+ TWT</span></div>
+        <ul class="tier-perks">
+          <li><span class="perk-dot"></span>All Gold benefits</li>
+          <li><span class="perk-dot"></span>Maximum fee discounts</li>
+          <li><span class="perk-dot"></span>Exclusive IRL events</li>
+          <li><span class="perk-dot"></span>Limited edition swag</li>
+          <li><span class="perk-dot"></span>Dedicated support line</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <p class="section-eyebrow">FAQ</p>
+    <h2 class="section-title" style="margin-bottom:48px;">Common questions</h2>
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is twtholders.trustwallet.com?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          This is Trust Wallet's official Priority Support portal, exclusively for TWT holders. All Trust Wallet users can access the standard Help Center, but holding and locking 50+ TWT unlocks Priority Support — giving you faster responses, guaranteed 24h specialist access, and the AI Transaction Checker.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Do I need TWT to get any support from Trust Wallet?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          No. All Trust Wallet users can access the Help Center and submit support requests for free. TWT holders who lock 50+ tokens simply receive Priority Support on top of that — faster responses and exclusive tools — as a benefit of participation in the ecosystem.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What does locking TWT mean? Can I get it back?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          Locking TWT means temporarily staking your tokens inside Trust Premium to access exclusive benefits. Your TWT remains yours throughout — you just can't transfer or spend it while it's locked. You can unlock it at any time, but the tokens become available again after a minimum 3-day unlock period.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is the AI Transaction Checker?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          The AI Transaction Checker is an AI-powered tool that reviews any blockchain transaction and explains what happened in plain language. It identifies failed, stuck, or unusual transactions, shows you fee breakdowns, and tells you exactly what to do next — no blockchain expertise required.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Does Priority Support guarantee my issue will be resolved?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          Priority Support guarantees that a specialist will respond to your ticket within 24 hours — not just an automated message. The team will always work to fully resolve your issue, but the 24h guarantee specifically covers the initial specialist response time.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is Priority Support available in my country?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          Priority Support is available globally to eligible TWT holders. Some options to buy or swap TWT may depend on your region and local provider availability, but the Priority Support feature itself is not geo-restricted.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How do I buy or get TWT if I don't have any?
+          <div class="faq-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="faq-answer">
+          Visit this page and connect a wallet with less than 50 TWT — you'll see a "Get TWT" button. On mobile, it redirects to the in-app swap screen where you can swap BNB, USDT, or USDC for TWT. On desktop, it routes through PancakeSwap on BNB Smart Chain. Add a small buffer for network fees.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-section">
+  <div class="cta-banner">
+    <svg width="52" height="60" viewBox="0 0 36 42" fill="none" style="margin-bottom:24px;">
+      <path d="M18 1L3 7V20C3 29.4 9.7 38.1 18 41C26.3 38.1 33 29.4 33 20V7L18 1Z" fill="#3375BB"/>
+      <path d="M18 1L18 41C9.7 38.1 3 29.4 3 20V7L18 1Z" fill="#00B473"/>
+    </svg>
+    <h2 class="cta-banner-title">Ready to unlock Priority Support?</h2>
+    <p class="cta-banner-desc">Hold and lock 50+ TWT in Trust Premium, connect your wallet, and get the help you deserve — fast.</p>
+    <div class="cta-banner-actions">
+      <a href="#" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Connect Wallet
+      </a>
+      <a href="https://trustwallet.com/blog/community/trust-wallet-token-twt-litepaper" target="_blank" rel="noopener" class="btn-outline">Read the TWT vision</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">
+        <svg width="24" height="28" viewBox="0 0 36 42" fill="none">
+          <path d="M18 1L3 7V20C3 29.4 9.7 38.1 18 41C26.3 38.1 33 29.4 33 20V7L18 1Z" fill="#3375BB"/>
+          <path d="M18 1L18 41C9.7 38.1 3 29.4 3 20V7L18 1Z" fill="#00B473"/>
+        </svg>
+        <span class="nav-logo-text">TWT Holders</span>
+      </a>
+      <p>The official Priority Support portal for Trust Wallet Token holders. Built by Trust Wallet.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Product</div>
+      <a href="#">Priority Support</a>
+      <a href="#">AI Transaction Checker</a>
+      <a href="#">Trust Premium</a>
+      <a href="#">TWT Litepaper</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Trust Wallet</div>
+      <a href="https://trustwallet.com" target="_blank" rel="noopener">trustwallet.com</a>
+      <a href="https://trustwallet.com/blog" target="_blank" rel="noopener">Blog</a>
+      <a href="https://support.trustwallet.com" target="_blank" rel="noopener">Help Center</a>
+      <a href="https://trustwallet.com/careers" target="_blank" rel="noopener">Careers</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Legal</div>
+      <a href="https://trustwallet.com/terms-of-service" target="_blank" rel="noopener">Terms of service</a>
+      <a href="https://trustwallet.com/privacy-notice" target="_blank" rel="noopener">Privacy policy</a>
+      <a href="https://trustwallet.com/cookie-notice" target="_blank" rel="noopener">Cookie notice</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Trust Wallet. All rights reserved.</span>
+    <div class="footer-socials">
+      <a href="https://twitter.com/TrustWalletApp" target="_blank" rel="noopener" title="X / Twitter">𝕏</a>
+      <a href="https://t.me/trustwallet" target="_blank" rel="noopener" title="Telegram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+      </a>
+      <a href="https://www.reddit.com/r/TrustApp/" target="_blank" rel="noopener" title="Reddit">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
