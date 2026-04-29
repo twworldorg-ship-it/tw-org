@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Support - TWT Holders | Trust Wallet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #FFFFFF;
+            color: #1F2937;
+            line-height: 1.6;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid #E5E7EB;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 28px;
+            color: #3B82F6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            margin-left: 32px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .connect-btn {
+            background: #2563EB;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 80px 5% 60px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .search-bar {
+            max-width: 620px;
+            margin: 40px auto;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 9999px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            flex: 1;
+            outline: none;
+            font-size: 18px;
+        }
+
+        /* Cards */
+        .cards-section {
+            padding: 60px 5%;
+            background: #F8FAFC;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .blue-btn {
+            background: #2563EB;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 9999px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Chatbot Banner */
+        .chatbot-banner {
+            background: linear-gradient(90deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 24px 5%;
+            margin: 40px 5%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Trending & Support Topics */
+        .topics {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .topics h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #0F172A;
+            color: #CBD5E1;
+            padding: 80px 5% 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-grid h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-grid a {
+            display: block;
+            color: #94A3B8;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        .trust-logo {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3B82F6, #60A5FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="logo">
+            <span style="font-size:32px;">🛡️</span>
+            <span>TRUST</span>
+        </div>
+        <div>
+            <a href="https://twtholders.trustwallet.com/#how-it-works">How it works</a>
+            <a href="https://twtholders.trustwallet.com/#support">Articles</a>
+            <a href="https://twtholders.trustwallet.com/#trending">Topics</a>
+            <a href="https://short.trustwallet.com/priority-support-landing-page">Blog</a>
+        </div>
+        <div>
+            <button onclick="connectWallet()" class="connect-btn">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>How can we help you?</h1>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search our FAQs...">
+        </div>
+
+        <div style="margin-top: 60px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+            <!-- Priority Support Card -->
+            <div style="background: white; border-radius: 20px; padding: 32px; width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <h2 style="font-size: 28px; margin-bottom: 12px;">Get Priority Support</h2>
+                <p style="color: #64748B; margin-bottom: 24px;">Lock 50 TWT to qualify</p>
+                <button onclick="connectWallet()" class="blue-btn" style="padding: 14px 40px; font-size: 18px;">Connect Wallet</button>
+                <p style="margin-top: 16px; font-size: 14px;"><a href="#" style="color:#3B82F6;">Learn more →</a></p>
+            </div>
+
+            <!-- Regular Support -->
+            <div style="background: #1E40AF; color: white; border-radius: 20px; padding: 32px; width: 380px;">
+                <h2 style="font-size: 28px; margin-bottom: 12px;">Get Support</h2>
+                <p style="margin-bottom: 24px;">Receive a reply within 24 hours</p>
+                <button class="blue-btn" style="background: white; color: #1E40AF;"><a href="https://short.trustwallet.com/priority-support-landing-page">Ask our chatbot</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Quick Actions -->
+    <section class="cards-section">
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="Bug Bounty" width="auto" height="140" src="/assets/contact1.svg"></div>
+                <h3>Bug Bounty</h3>
+                <p style="margin: 16px 0; color:#64748B;">Help us maintain security and earn rewards</p>
+                <button class="blue-btn">Report Vulnerability</button>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="List a Token" width="auto" height="140" src="/assets/contact2.svg"></div>
+                <h3>List a Token</h3>
+                <p style="margin: 16px 0; color:#64748B;">Submit your token for review</p>
+                <button class="blue-btn">Submit Token</button>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: #F1F5F9;"><img class="w-auto h-35 object-contain mb-4" alt="Launchpool Listing" width="auto" height="140" src="/assets/contact3.svg"></div>
+                <h3>Launchpool Listing</h3>
+                <p style="margin: 16px 0; color:#64748B;">Apply for featured placement</p>
+                <button class="blue-btn">Apply Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Banner -->
+    <div class="chatbot-banner">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="font-size: 48px;">🤖</div>
+            <div>
+                <h3 style="font-size: 22px;">Now what you are looking for?</h3>
+            </div>
+        </div>
+        <button onclick="alert('Chatbot opened (demo)')" style="background: white; color: #1E40AF; border: none; padding: 14px 32px; border-radius: 9999px; font-weight: 600; cursor: pointer;">
+            Ask our Chatbot
+        </button>
+    </div>
+
+    <!-- Trending Topics -->
+    <section class="topics">
+        <h2>Trending topics</h2>
+        <div class="topic-grid">
+            <div class="topic-card">How to transfer funds to my bank account</div>
+            <div class="topic-card">Report Scam & Fraud</div>
+            <div class="topic-card">Send funds to the wrong network</div>
+            <div class="topic-card">Lost Recovery Phrase or Private Key</div>
+            <div class="topic-card">What to do if Selling Crypto in-app Fails</div>
+            <div class="topic-card">How to Locate Missing Funds</div>
+        </div>
+
+        <h2 style="margin-top: 80px;">Support topics</h2>
+        <div class="topic-grid">
+            <div class="topic-card">Getting Started with Trust Wallet</div>
+            <div class="topic-card">Buying and Cashing Out Crypto</div>
+            <div class="topic-card">Generating Rewards</div>
+            <div class="topic-card">Connecting to DeFi and dApps</div>
+            <div class="topic-card">Security</div>
+            <div class="topic-card">How-to Guides</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="trust-logo">TRUST</div>
+            </div>
+            <div>
+                <h4>Wallet</h4>
+                <a href="#">Mobile App</a>
+                <a href="#">Browser Extension</a>
+            </div>
+            <div>
+                <h4>Features</h4>
+                <a href="#">Buy Crypto</a>
+                <a href="#">Swaps</a>
+                <a href="#">Staking</a>
+                <a href="#">NFTs</a>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <a href="#">FAQ</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div>
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Press Kit</a>
+            </div>
+        </div>
+        <div style="text-align:center; color:#64748B; font-size:14px; border-top: 1px solid #334155; padding-top: 40px;">
+            © 2026 Trust Wallet. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function connectWallet() {
+            alert("Connecting to Trust Wallet...\n\nIn the real site this would check your locked TWT balance (50+ TWT required for Priority Support).");
+        }
+    </script>
+</body>
+</html>
